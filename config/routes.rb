@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   root "pages#home"
   get 'about',to:'pages#about'
-  resources:articles,only:[:show,:index]
+  resources:articles
+  # resources will provide these REST full ( REpresentational State Transfer - mapping http verbs ( front end ) to CRUD actions) routes - only:[:show,:index,:new,:create,:edit,:update,:destroy]
 end
