@@ -54,7 +54,7 @@ class ArticlesController < ApplicationController
       puts "Inside Destroy action"
       
       @article.destroy
-      redirect_to articles_path
+      redirect_to articles_path , status: :see_other
     end
 
     private # anything below this is an private method
