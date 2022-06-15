@@ -21,16 +21,16 @@ class ArticlesController < ApplicationController
     def create
       puts "Inside create action"
       # flash[:notice] = params[:article] # flash are also like hash- two common keys notice and alert
-      flash[:notice] = "Article was created successfully!"
-     
       # redirect_to articles_path
       @article = Article.new(article_params) # chaining 
       #whitelisting the fields which are coming from web -> strong parameter ( security feature )
       if @article.save
+        flash[:notice] = "Article was created successfully!"
         redirect_to article_path(@article)   # since we need to redirect to the show action we must corresponding prefixname_path then the corresponding arrtribute
         # redirect_to @article # short form for the above line i.e we can skip the article_path
       else
-        puts @article.errors.any?
+        @errors = @article.errors.full_messages
+        puts @errors
         render 'new' # if some validation errors occurs we need to reload the same page and display the errors
       end
     end
@@ -45,7 +45,8 @@ class ArticlesController < ApplicationController
         flash[:notice] = "Article was updated successfully"
         redirect_to @article
       else
-        redirect_to edit_article_path
+        @errors = @article.errors.full_messages
+        render 'edit'
       end
     end
     
