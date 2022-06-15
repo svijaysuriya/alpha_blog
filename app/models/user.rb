@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+    has_many :articles # here plural becuase an user can make many articles
     validates :username, presence: true, 
                length: {minimum: 3, maximum: 25}, 
                uniqueness: { case_sensitive: false }
