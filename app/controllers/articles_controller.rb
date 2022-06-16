@@ -9,7 +9,9 @@ class ArticlesController < ApplicationController
 
     def index
       puts "Inside index action"
-      @articles = Article.all # inorder to be available at the views file!!
+      # @articles = Article.all # inorder to be available at the views file!! below one is pagination
+      @articles = Article.paginate(page: params[:page], per_page:5)
+
     end
 
     def new
