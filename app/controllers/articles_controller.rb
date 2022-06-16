@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
       # redirect_to articles_path
       @article = Article.new(article_params) # chaining 
       #whitelisting the fields which are coming from web -> strong parameter ( security feature )
-      @article.user = User.first
+      @article.user = current_user
       if @article.save
         flash[:notice] = "Article was created successfully!"
         redirect_to article_path(@article)   # since we need to redirect to the show action we must corresponding prefixname_path then the corresponding arrtribute

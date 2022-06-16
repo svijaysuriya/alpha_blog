@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   # resources will provide these REST full ( REpresentational State Transfer - mapping http verbs ( front end ) to CRUD actions) routes - only:[:show,:index,:new,:create,:edit,:update,:destroy]
   get 'signup', to:'users#new'
   resources :users , except: [:new]
+  get 'login' , to:'sessions#new'
+  post 'login' , to:'sessions#create'
+  delete 'logout' , to:'sessions#destroy'
 end

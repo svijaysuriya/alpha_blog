@@ -6,4 +6,6 @@ module ApplicationHelper
         gravatar_src = "https://www.gravatar.com/avatar/#{hash}?s=#{s}"
         image_tag(gravatar_src,alt:user.username,class:"rounded shadow mx-auto d-block ")
     end
+
+
 end
