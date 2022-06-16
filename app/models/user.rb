@@ -1,6 +1,8 @@
 class User < ApplicationRecord
     before_save {self.email = email.downcase}
-    has_many :articles # here plural becuase an user can make many articles
+    has_many :articles , dependent: :destroy
+    # here plural becuase an user can make many articles
+    # dependent destroy means the associated articles will also get deleted when we delete the user
     validates :username, presence: true, 
                length: {minimum: 3, maximum: 25}, 
                uniqueness: { case_sensitive: false }

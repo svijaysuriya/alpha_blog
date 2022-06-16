@@ -16,7 +16,15 @@
                         <p class="card-text"><%= link_to gravatar_for(i, size: 150), user_path(i) %></p>
                         <p class="card-text"><%= pluralize(i.articles.count,"article")%></p>
                         <%= link_to "View profile", user_path(i), class: "btn btn-outline-success" %>
-                        <%= link_to "Edit profile", edit_user_path(i), class: "btn btn-outline-primary" %>                    </div>
+                        <% if logged_in? %>
+                            <% if current_user == i %>
+                                <%= link_to "Edit profile", edit_user_path(i), class: "btn btn-outline-primary" %> 
+                            <%end%>
+                            <% if current_user.admin? %>
+                                <%= link_to "Delete profile", user_path(i),class: "btn btn-outline-danger", data:{turbo_method: :delete,turbo_confirm: "Are you sure?"}%>
+                            <%end%>
+                        <% end %>                
+                    </div>
                     <div class="card-footer text-muted">
                         <small>joined <%= time_ago_in_words(i.created_at)%> ago,</small>
                     </div>

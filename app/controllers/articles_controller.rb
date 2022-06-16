@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only:[:show, :edit, :update, :destroy]
+    before_action :require_user, except: [:show, :index] # to prevent from url hardcoding!!
+    before_action :require_same_user , only: [:edit, :update, :destroy] # this ordering must be preserved !!
 
     def show
       puts "Inside show action"
@@ -68,4 +70,14 @@ class ArticlesController < ApplicationController
       def article_params
         params.require(:article).permit(:title, :description)
       end
+
+      
+      # since we have first checked for loggedin? we can conidentlly use the current_user 
+      def require_same_user
+        if current_user != @article.user && !current_user.admin?
+          flash[:alert] = "you can edit or delete your own article :)"
+          redirect_to @article
+        end
+      end
+
 end
