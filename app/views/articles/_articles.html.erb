@@ -6,7 +6,14 @@
                     <div class="card-header font-italic">
                       <% if i.user %>
                         by <%= link_to i.user.username ,user_path(i.user)%>
-											<%end%>
+					<%end%>
+                    <% if i.categories.any?%>
+                        <div class="mt-2">
+                            <%= render i.categories %>
+                            <% # above line expects a partial to display all the categories associated with the article , it will provide a iterator ( category)
+                            %>
+                            </div>
+                        <% end %>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><%= link_to i.title, article_path(i), class:"text-success" %></h5>

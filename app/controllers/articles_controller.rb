@@ -24,6 +24,7 @@ class ArticlesController < ApplicationController
 
     def create
       puts "Inside create action"
+      binding.break
       # flash[:notice] = params[:article] # flash are also like hash- two common keys notice and alert
       # redirect_to articles_path
       @article = Article.new(article_params) # chaining 
@@ -68,7 +69,7 @@ class ArticlesController < ApplicationController
       end
       
       def article_params
-        params.require(:article).permit(:title, :description)
+        params.require(:article).permit(:title, :description, category_ids: [])
       end
 
       
