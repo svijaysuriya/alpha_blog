@@ -18,11 +18,21 @@
                   <li><%= link_to "Create New Article",new_article_path , class: "dropdown-item" %> </li>
                 <% end %>
                 <li><%= link_to "Display Articles", articles_path , class: "dropdown-item" %> </li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
             </li>
             
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% if logged_in? && current_user.admin? %>
+                  <li><%= link_to "Create New Category",new_category_path , class: "dropdown-item" %> </li>
+                <% end %>
+                <li><%= link_to "View Categories", categories_path , class: "dropdown-item" %> </li>
+              </ul>
+            </li>
+
             <% if logged_in? %>
               <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,11 +56,14 @@
                 <%= link_to "Sign Up", signup_path, class: "nav-link" %>
               </li>
             <% end %>
-          </ul>
+            <li>"_________________________"</li>
+          <li>
           <form class="d-flex " role="search">
-            <input class="form-control me-2 navbar-right" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
+          </li>
         </div>
+        </ul>
       </div>
     </nav>
